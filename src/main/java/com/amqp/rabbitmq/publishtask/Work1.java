@@ -1,4 +1,4 @@
-package com.amqp.publishtask;
+package com.amqp.rabbitmq.publishtask;
 
 import com.rabbitmq.client.*;
 

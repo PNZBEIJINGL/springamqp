@@ -1,4 +1,4 @@
-package com.amqp.helloword;
+package com.amqp.rabbitmq.helloword;
 
 import com.rabbitmq.client.*;
 
@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 public class Customer {
+
 
     private final static String QUEUE_NAME = "rabbitMQ.test";
 
@@ -31,6 +32,8 @@ public class Customer {
             public void handleDelivery(String consumerTag, Envelope envelope,
                                        AMQP.BasicProperties properties, byte[] body)
                     throws IOException {
+
+                //envelope主要存放生产者相关信息（比如交换机、路由key等）body是消息实体
                 String message = new String(body, "UTF-8");
                 System.out.println("Customer Received '" + message + "'");
             }

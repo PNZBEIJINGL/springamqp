@@ -1,4 +1,4 @@
-package com.amqp.helloword;
+package com.amqp.rabbitmq.helloword;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * 创建消费者Produce
+ * 创建生产者Produce
  */
 public class Producer {
 
