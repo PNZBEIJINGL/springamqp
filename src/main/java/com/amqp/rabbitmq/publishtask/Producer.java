@@ -23,7 +23,7 @@ public class Producer {
 
         //分发信息
         for (int i=0;i<10;i++){
-            String message="Hello RabbitMQ"+i;
+            String message="Hello RabbitMQ: "+i;
             channel.basicPublish("",TASK_QUEUE_NAME,
                     MessageProperties.PERSISTENT_TEXT_PLAIN,message.getBytes());
             System.out.println("NewTask send '"+message+"'");

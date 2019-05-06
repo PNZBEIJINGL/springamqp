@@ -12,10 +12,10 @@ public class Reciver1 {
         ConnectionFactory factory = new ConnectionFactory();
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-        channel.exchangeDeclare(EXCHANGE_NAME, null);
+        channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
 
         String queueName = channel.queueDeclare().getQueue();
-        channel.queueBind(queueName, EXCHANGE_NAME, null);
+        channel.queueBind(queueName, EXCHANGE_NAME, "");
 
         System.out.println("Reciver1 waiting! queueName=" + queueName);
         Consumer consumer = new DefaultConsumer(channel) {

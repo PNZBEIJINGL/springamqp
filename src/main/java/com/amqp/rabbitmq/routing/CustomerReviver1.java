@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 public class CustomerReviver1 {
-    private static final String EXCHANGE_NAME = "server_logs";
+    private static final String EXCHANGE_NAME = "server_logs1";
 
     public static void main(String[] args) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
@@ -18,10 +18,10 @@ public class CustomerReviver1 {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
         //声明交换机并获取匿名队列
-        channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
+        channel.exchangeDeclare(EXCHANGE_NAME, "direct");
         String queueName = channel.queueDeclare().getQueue();
         channel.queueBind(queueName, EXCHANGE_NAME, "");
-        System.out.println("CustomerReviver1 queueName="+queueName);
+        //System.out.println("CustomerReviver1 queueName="+queueName);
 
         List<String> keys = Arrays.asList("INFO", "WARNING");
         for (String key : keys) {

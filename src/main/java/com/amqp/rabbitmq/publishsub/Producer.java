@@ -20,7 +20,7 @@ public class Producer {
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-        //fanout表示分发，所有的消费者得到同样的队列信息
+        //fanout表示分发,Fanout交换器，所有的消费者得到同样的队列信息
         channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
 
         //分发信息
