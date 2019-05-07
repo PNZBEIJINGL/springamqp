@@ -2,7 +2,7 @@ package com.amqp.rabbitmq.publishtask;
 /**
  * 2，实现任务分发
  * 积累了多个任务，多个消费者来处理
- *
+ *  P  -> Q  ->C1,C2
  *
  * queueDeclare(String queue,boolean durable,boolean exlusive,boolean autoDelete,Map<String, Object> arguments)
  * durable ：为true来实现Queue 持久化，服务器重启后Queue会继续存在,但是不保证消息存在，

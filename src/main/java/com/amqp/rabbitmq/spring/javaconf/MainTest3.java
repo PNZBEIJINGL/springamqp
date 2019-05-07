@@ -1,4 +1,4 @@
-package com.amqp.rabbitmq.spring.xmlconf;
+package com.amqp.rabbitmq.spring.javaconf;
 
 import com.amqp.rabbitmq.spring.javaconf.RabbitConfiguration;
 import org.springframework.amqp.core.AmqpTemplate;
