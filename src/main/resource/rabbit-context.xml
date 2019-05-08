@@ -7,11 +7,40 @@
            http://www.springframework.org/schema/beans
            https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- 配置链接池-->
-    <rabbit:connection-factory id="connectionFactory" host="127.0.0.1" port="5672" username="guest" password="guest" requested-heartbeat="60"/>
+    <!-- ############################## 配置链接池################################### -->
+    <!-- 1.使用XML 配置CachingConnectionFactory ,JAVA方法 com.amqp.rabbitmq.spring.connection.MainTest -->
+    <!-- 1.默认的cacheSize=25 ,如果需要更多则需要添加设置 -->
+    <!--
+    <bean id="connectionFactory"
+          class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+        <constructor-arg value="somehost"/>
+        <property name="username" value="guest"/>
+        <property name="password" value="guest"/>
+        <property name="channelCacheSize" value="50"/>
+    </bean>
+    -->
 
-    <!-- 配置RabbitTemplate-->
-    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory"/>
+    <!-- 2. 因为Bean文件引用了rabbit namespace 所以可以用下面的方式快速配置-->
+    <rabbit:connection-factory id="connectionFactory" host="127.0.0.1" port="5672" username="guest" password="guest"
+                               requested-heartbeat="60" channel-cache-size="50"/>
+    <!-- 如果是集群的环境下可以配置多个,address , 例如下面的方式-->
+    <!--
+    <rabbit:connection-factory
+            id="connectionFactory" addresses="host1:5672,host2:5672"/>
+     -->
+
+    <!-- ##############################  配置 AmqpTemplate################################### -->
+    <!-- 从1.3版本之后 可以使用retryTemplate 来处理代理连接问题-->
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" retry-template="retryTemplate"/>
+    <bean id="retryTemplate" class="org.springframework.retry.support.RetryTemplate">
+        <property name="backOffPolicy">
+            <bean class="org.springframework.retry.backoff.ExponentialBackOffPolicy">
+                <property name="initialInterval" value="500"/>
+                <property name="multiplier" value="10.0"/>
+                <property name="maxInterval" value="10000"/>
+            </bean>
+        </property>
+    </bean>
 
 
     <rabbit:admin connection-factory="connectionFactory"/>
