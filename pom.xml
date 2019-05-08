@@ -9,13 +9,22 @@
     <version>1.0-SNAPSHOT</version>
     <dependencies>
 
+        <!--
         <dependency>
             <groupId>com.rabbitmq</groupId>
             <artifactId>amqp-client</artifactId>
             <version>3.6.5</version>
         </dependency>
+        -->
 
-        <!-- spring 整合依赖 2.1.5当前最新版本 -->
+        <!-- spring 整合依赖 2.1.5当前最新版本  官网2.5.1需要5.4.0 以上的amqp-clent包-->
+
+        <!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.6.0</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit -->
         <dependency>
             <groupId>org.springframework.amqp</groupId>
