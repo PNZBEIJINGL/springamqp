@@ -9,7 +9,7 @@
 
     <!-- ############################## 配置链接池################################### -->
     <!-- 1.使用XML 配置CachingConnectionFactory ,JAVA方法 com.amqp.rabbitmq.spring.connection.MainTest -->
-    <!-- 1.默认的cacheSize=25 ,如果需要更多则需要添加设置 -->
+    <!-- 默认cacheSize=25 ,如果需要更多则需要添加设置 -->
     <!--
     <bean id="connectionFactory"
           class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
@@ -45,7 +45,7 @@
 
     <rabbit:admin connection-factory="connectionFactory"/>
 
-    <!-- 配置队列名称-->
+    <!-- ##############################  配置 配置队列名称################################### -->
     <rabbit:queue name="myqueue"/>
 
 </beans>

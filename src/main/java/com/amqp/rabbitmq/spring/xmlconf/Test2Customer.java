@@ -10,7 +10,9 @@ public class Test2Customer {
     public static void main(String[] args){
         ApplicationContext context =
                 new FileSystemXmlApplicationContext("src/main/resource/rabbit-context.xml");
-        //
+        //  resources右击，选择mark dirctory as test resources root
+        // ApplicationContext context =new FileSystemXmlApplicationContext("classpath:/rabbit-context.xml");
+
         AmqpTemplate template = context.getBean(AmqpTemplate.class);
         String foo = (String) template.receiveAndConvert("myqueue");
         System.out.println(foo);
