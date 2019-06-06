@@ -78,3 +78,4 @@ SpringAMQP 项目官网： https://projects.spring.io/spring-amqp/
 
 其他：
 https://www.cnblogs.com/cwp-bg/p/8399638.html
+https://www.jianshu.com/p/256c502d09cd
