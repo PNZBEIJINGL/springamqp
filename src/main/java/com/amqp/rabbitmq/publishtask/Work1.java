@@ -13,8 +13,8 @@ public class Work1 {
         ConnectionFactory factory = new ConnectionFactory();
         Connection connection = factory.newConnection();
         final Channel channel = connection.createChannel();
-        channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
         channel.basicQos(1);
+        channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
         System.out.println("Worker1  Waiting for messages");
 
         final Consumer consumer = new DefaultConsumer(channel) {

@@ -21,8 +21,9 @@
     -->
 
     <!-- 2. 因为Bean文件引用了rabbit namespace 所以可以用下面的方式快速配置-->
+
     <rabbit:connection-factory id="connectionFactory" host="127.0.0.1" port="5672" username="guest" password="guest"
-                               requested-heartbeat="60" channel-cache-size="50"/>
+                               requested-heartbeat="60" channel-cache-size="50" connection-timeout="6000" />
     <!-- 如果是集群的环境下可以配置多个,address , 例如下面的方式-->
     <!--
     <rabbit:connection-factory
@@ -30,6 +31,7 @@
      -->
 
     <!-- ##############################  配置 AmqpTemplate################################### -->
+
     <!-- 从1.3版本之后 可以使用retryTemplate 来处理代理连接问题-->
     <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" retry-template="retryTemplate"/>
     <bean id="retryTemplate" class="org.springframework.retry.support.RetryTemplate">
@@ -42,6 +44,10 @@
         </property>
     </bean>
 
+
+    <!--
+    <rabbit:connection-factory id="connectionFactory" connection-factory="rabbitConnectionFactory"/>
+    -->
 
     <rabbit:admin connection-factory="connectionFactory"/>
 

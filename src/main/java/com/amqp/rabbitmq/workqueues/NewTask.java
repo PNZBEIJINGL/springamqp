@@ -1,4 +1,4 @@
-package com.amqp.rabbitmq.helloword;
+package com.amqp.rabbitmq.workqueues;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * 创建生产者Produce
+ * 创建10个工作
  */
-public class Producer {
+public class NewTask {
 
-    public final static String QUEUE_NAME = "rabbitMQ.test";
+    public final static String QUEUE_NAME = "tutorial.queue";
 
     public static void main(String[] args) throws IOException, TimeoutException {
         //使用工厂创建1个连接
@@ -24,14 +24,16 @@ public class Producer {
             //创建1个通道，声明要关注的队列
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
-            //发送消息
-            String message = "Hello world ";
-            channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
-            System.out.println("Producer Send +'" + message + "'");
+            //发送10个任务
+            for (int i = 0; i < 10; i++) {
+                String message = "task message.NO." + i;
+                channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+                System.out.println(" [x] Sent '" + message + "'");
+            }
         } finally {
             //关闭通道和连接
-           //channel.close();
-           //connection.close();
+            //channel.close();
+            //connection.close();
         }
     }
 }
