@@ -11,24 +11,25 @@ import java.util.concurrent.TimeoutException;
 
 public class Producer {
 
-    private static final String EXCHANGE_NAME = "server_logs1";
+    private static final String EXCHANGE_NAME = "exchange_direct_log";
 
     public static void main(String[] args) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost("127.0.0.1");
 
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-        //fanout表示分发，所有的消费者得到同样的队列信息 //direct 路由匹配才能接收
+        //exchange-type= direct 直连交换器，routingKeys =bindingkey
         channel.exchangeDeclare(EXCHANGE_NAME, "direct");
 
-        //分发信息
-        List<String> keys = Arrays.asList("INFO", "WARNING", "ERROR");
-        for (String key : keys) {
-            String message =key+ " Send the message level:" ;
-            channel.basicPublish(EXCHANGE_NAME, key, null, message.getBytes());
-            System.out.println(" Send" + key + "':'" + message);
+        //routingKeys
+        List<String> routingKeys = Arrays.asList("INFO", "WARNING", "ERROR");
+
+        for (String rountingkey : routingKeys) {
+            String message =rountingkey+ " Send the message level:" ;
+            channel.basicPublish(EXCHANGE_NAME, rountingkey, null, message.getBytes("UTF-8"));
+            System.out.println(" Send" + rountingkey + "':'" + message);
         }
 
 
