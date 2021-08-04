@@ -13,7 +13,7 @@ public class TopicSender {
 
     public static void main(String[] args) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost("127.0.0.1");
 
 
         Connection connection = factory.newConnection();
@@ -23,19 +23,17 @@ public class TopicSender {
         channel.exchangeDeclare(EXCHANGE_NAME, "topic");
         //待发送的消息
         String[] routingKeys = new String[]{
-                "quick.orange.rabbit",
-                "lazy.orange.elephant",
-                "quick.orange.fox",
-                "lazy.brown.fox",
-                "quick.brown.fox",
-                "quick.orange.male.rabbit",
-                "lazy.orange.male.rabbit"
+                "customer.error",
+                "product.info",
+                "product.error",
+                "product.error.log",
+                "accpet.info.log",
         };
         //发送消息
-        for (String severity : routingKeys) {
-            String message = "From " + severity + " routingKey' s message!";
-            channel.basicPublish(EXCHANGE_NAME, severity, null, message.getBytes());
-            System.out.println("TopicSend Sent '" + severity + "':'" + message + "'");
+        for (String routingKey : routingKeys) {
+            String message = "routingKey=" + routingKey + " log:" + " this is information";
+            channel.basicPublish(EXCHANGE_NAME, routingKey, null, message.getBytes());
+            System.out.println("TopicSend Sent '" + routingKey + "':'" + message + "'");
         }
 
 
