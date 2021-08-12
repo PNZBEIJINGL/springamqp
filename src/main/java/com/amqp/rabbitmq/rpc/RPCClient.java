@@ -26,6 +26,8 @@ public class RPCClient implements AutoCloseable {
     }
 
     public static void main(String[] argv) {
+        //try语句（try-with-resource） ,try块退出的时候会自动调用close方法关闭资源 ，JDK1.7增加功能
+        //资源实现了AutoCloseable接口的类 接口是JDK1.7增加
         try (RPCClient fibonacciRpc = new RPCClient()) {
             for (int i = 0; i < 32; i++) {
                 String i_str = Integer.toString(i);
@@ -54,6 +56,7 @@ public class RPCClient implements AutoCloseable {
         //默认交换器将消息发送到队列，  属性声明响应队列到 replyQueueName
         channel.basicPublish("", requestQueueName, props, message.getBytes("UTF-8"));
 
+        //创建容量为1的阻塞队列
         final BlockingQueue<String> response = new ArrayBlockingQueue<>(1);
 
         String ctag = channel.basicConsume(replyQueueName, true, (consumerTag, delivery) -> {
