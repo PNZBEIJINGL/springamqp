@@ -61,13 +61,15 @@ public class RPCClient implements AutoCloseable {
 
         String ctag = channel.basicConsume(replyQueueName, true, (consumerTag, delivery) -> {
             if (delivery.getProperties().getCorrelationId().equals(corrId)) {
+                //BlockingQueue阻塞队列off表示向队列尾部插入一格元素，队列满则等待
                 response.offer(new String(delivery.getBody(), "UTF-8"));
             }
         }, consumerTag -> {
         });
 
+        //检索并删除队列头，没有则等待
         String result = response.take();
-        channel.basicCancel(ctag);//取消消费者对垒的订阅关系
+        channel.basicCancel(ctag);//取消消费者队列的订阅关系
         return result;
     }
 
