@@ -35,12 +35,12 @@ public class PublisherConfirms {
             String queue = UUID.randomUUID().toString();
             ch.queueDeclare(queue, false, false, true, null);
 
-            ch.confirmSelect();
+            ch.confirmSelect();//开发发布确认
             long start = System.nanoTime();
             for (int i = 0; i < MESSAGE_COUNT; i++) {
                 String body = String.valueOf(i);
                 ch.basicPublish("", queue, null, body.getBytes());
-                ch.waitForConfirmsOrDie(5_000);
+                ch.waitForConfirmsOrDie(5_000);//等待确认，其中5_000是JDK1.7特性
             }
             long end = System.nanoTime();
             System.out.format("Published %,d messages individually in %,d ms%n", MESSAGE_COUNT, Duration.ofNanos(end - start).toMillis());
@@ -85,22 +85,23 @@ public class PublisherConfirms {
 
             String queue = UUID.randomUUID().toString();
             ch.queueDeclare(queue, false, false, true, null);
-
-            ch.confirmSelect();
-
+            ch.confirmSelect();//开启发布确认
+            //定义Map建立序列和消息关系
             ConcurrentNavigableMap<Long, String> outstandingConfirms = new ConcurrentSkipListMap<>();
-
+            //定义成功回调函数
             ConfirmCallback cleanOutstandingConfirms = (sequenceNumber, multiple) -> {
                 if (multiple) {
+                    //multiple=false之前的消息都移除
                     ConcurrentNavigableMap<Long, String> confirmed = outstandingConfirms.headMap(
                             sequenceNumber, true
                     );
                     confirmed.clear();
                 } else {
+                    //multiple=false只清除自身所以将成功的消息雄map中移除
                     outstandingConfirms.remove(sequenceNumber);
                 }
             };
-
+            //addConfirmListener方法有2个参数，第一个是成功确认，这个回调上面已经定义，第二个参数是代理否决即确认失败
             ch.addConfirmListener(cleanOutstandingConfirms, (sequenceNumber, multiple) -> {
                 String body = outstandingConfirms.get(sequenceNumber);
                 System.err.format(
@@ -113,6 +114,7 @@ public class PublisherConfirms {
             long start = System.nanoTime();
             for (int i = 0; i < MESSAGE_COUNT; i++) {
                 String body = String.valueOf(i);
+                //生成序列并将消息和序列关系保存到MAP里
                 outstandingConfirms.put(ch.getNextPublishSeqNo(), body);
                 ch.basicPublish("", queue, null, body.getBytes());
             }
