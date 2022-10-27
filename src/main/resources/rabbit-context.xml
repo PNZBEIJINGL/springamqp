@@ -54,4 +54,6 @@
     <!-- ##############################  配置 配置队列名称################################### -->
     <rabbit:queue name="myqueue"/>
 
+    <bean id="customizeFactoryBean" class="com.amqp.rabbitmq.spring.xmlconf.CustomizeFactoryBean"></bean>
+
 </beans>

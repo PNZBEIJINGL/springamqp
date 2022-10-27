@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+           https://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+           http://www.springframework.org/schema/beans
+           https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  1.factory默认host为本地 -->
+    <rabbit:connection-factory id="connectionFactory"/>
+
+    <!--  2.factory可以配置其他的一些属性值
+   <rabbit:connection-factory id="connectionFactory" host="127.0.0.1" port="5672" username="guest" password="guest"
+                              requested-heartbeat="60" channel-cache-size="50" connection-timeout="6000" />
+    -->
+    <!--   3.factory如果是集群的环境下可以配置多个,address , 例如下面的方式
+
+     <rabbit:connection-factory
+             id="connectionFactory" addresses="host1:5672,host2:5672"/>
+      -->
+
+
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory"/>
+
+    <!--  1. <rabbit:admin/>  声明会会自动查找类型为Queue ,Exchange,Binging 的Bean 并声明 因此不需要在简单的Java驱动程序中显式使用该bean -->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <rabbit:queue name="myqueue"/>
+</beans>

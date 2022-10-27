@@ -1,4 +1,4 @@
-package com.amqp.rabbitmq.spring.connection;
+package com.amqp.spring.v247;
 /**
  *
  * 使用原生的工厂链接创建队列,发送并接收1个消息
