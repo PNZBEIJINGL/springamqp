@@ -1,4 +1,4 @@
-package com.amqp.spring.v247.setp3;
+package com.amqp.spring.quicktour.setp3;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.context.ApplicationContext;

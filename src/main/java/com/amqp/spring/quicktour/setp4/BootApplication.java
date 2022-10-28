@@ -1,4 +1,4 @@
-package com.amqp.spring.v247.setp4;
+package com.amqp.spring.quicktour.setp4;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Queue;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
  *
  */
 
-@SpringBootApplication(scanBasePackages = {"com.amqp.spring.v247.setp4"})
+@SpringBootApplication(scanBasePackages = {"com.amqp.spring.quicktour.setp4"})
 public class BootApplication {
 
     public static void main(String[] args) {
