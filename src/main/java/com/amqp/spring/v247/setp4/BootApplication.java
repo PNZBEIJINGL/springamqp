@@ -3,22 +3,27 @@ package com.amqp.spring.v247.setp4;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 /**
  *
  */
-public class SpringBootApplication {
+
+@SpringBootApplication(scanBasePackages = {"com.amqp.spring.v247.setp4"})
+public class BootApplication {
 
     public static void main(String[] args) {
         //Spring Boot会自动配置基础结构beans
-        //SpringApplication.run(Application.class, args);
+        SpringApplication.run(BootApplication.class, args);
     }
 
-/*    @Bean
+    @Bean
     public ApplicationRunner runner(AmqpTemplate template) {
         return args -> template.convertAndSend("myqueue", "foo");
-    }*/
+    }
 
     @Bean
     public Queue myQueue() {
@@ -27,6 +32,6 @@ public class SpringBootApplication {
 
     @RabbitListener(queues = "myqueue")
     public void listen(String in) {
-        System.out.println(in);
+        System.out.println("#############listen message:"+in);
     }
 }

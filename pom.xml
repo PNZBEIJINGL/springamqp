@@ -7,7 +7,41 @@
     <groupId>springamqp</groupId>
     <artifactId>springamqp</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.2</version>
+    </parent>
+
     <dependencies>
+
+        <!-- WEB应用 -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <!--
+        <dependency>
+           <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+         </dependency>
+        -->
+
 
         <!--
         <dependency>
@@ -17,24 +51,7 @@
         </dependency>
         -->
 
-        <!-- spring 整合依赖 2.1.5当前最新版本  官网2.5.1需要5.4.0 以上的amqp-clent包-->
-
-        <!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
-        <dependency>
-            <groupId>com.rabbitmq</groupId>
-            <artifactId>amqp-client</artifactId>
-            <version>5.6.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit -->
-
-        <dependency>
-            <groupId>org.springframework.amqp</groupId>
-            <artifactId>spring-rabbit</artifactId>
-        <!-- <version>2.1.5.RELEASE</version> -->
-             <version>2.4.7</version>
-     </dependency>
-
-     <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core  -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -47,5 +64,12 @@
         </dependency>
 
     </dependencies>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
