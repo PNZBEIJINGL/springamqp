@@ -1,4 +1,4 @@
-package com.amqp.spring.quicktour.setp4;
+package com.amqp.springsmqp.setp4;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Queue;
@@ -22,7 +22,7 @@ public class BootApplication {
 
     @Bean
     public ApplicationRunner runner(AmqpTemplate template) {
-        return args -> template.convertAndSend("myqueue", "foo");
+        return args -> template.convertAndSend("myqueue", "This is a springboot demo");
     }
 
     @Bean

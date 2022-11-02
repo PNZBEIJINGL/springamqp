@@ -1,4 +1,4 @@
-package com.amqp.spring.quicktour.setp2;
+package com.amqp.springsmqp.setp2;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.context.ApplicationContext;

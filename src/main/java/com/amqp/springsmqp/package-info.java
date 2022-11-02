@@ -1,4 +1,4 @@
-package com.amqp.spring.quicktour;
+package com.amqp.springsmqp;
 /**
  *
  * 使用原生的工厂链接创建队列,发送并接收1个消息

@@ -1,4 +1,4 @@
-package com.amqp.spring.quicktour.setp3;
+package com.amqp.springsmqp.setp3;
 
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Queue;
