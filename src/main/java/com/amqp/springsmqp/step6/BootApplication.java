@@ -1,4 +1,4 @@
-package com.amqp.springsmqp.setp4;
+package com.amqp.springsmqp.step6;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Queue;
@@ -12,17 +12,12 @@ import org.springframework.context.annotation.Bean;
  *
  */
 
-@SpringBootApplication(scanBasePackages = {"com.amqp.spring.quicktour.setp4"})
+@SpringBootApplication(scanBasePackages = {"com.amqp.spring.quicktour.setp6"})
 public class BootApplication {
 
     public static void main(String[] args) {
         //Spring Boot会自动配置基础结构beans
         SpringApplication.run(BootApplication.class, args);
-    }
-
-    @Bean
-    public ApplicationRunner runner(AmqpTemplate template) {
-        return args -> template.convertAndSend("myqueue", "This is a springboot demo");
     }
 
     @Bean
@@ -32,6 +27,6 @@ public class BootApplication {
 
     @RabbitListener(queues = "myqueue")
     public void listen(String in) {
-        System.out.println("listen message:"+in);
+        System.out.println("listen message:" + in);
     }
 }
