@@ -1,4 +1,4 @@
-package com.amqp.springsmqp.step7;
+package com.amqp.tutorial.step1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

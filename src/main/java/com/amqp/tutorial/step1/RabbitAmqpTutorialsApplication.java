@@ -1,4 +1,4 @@
-package com.amqp.springsmqp.step7;
+package com.amqp.tutorial.step1;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

@@ -1,4 +1,4 @@
-package com.amqp.springsmqp.step7;
+package com.amqp.tutorial.step1;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;

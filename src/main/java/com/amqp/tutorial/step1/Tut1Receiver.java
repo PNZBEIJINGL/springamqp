@@ -1,4 +1,4 @@
-package com.amqp.springsmqp.step7;
+package com.amqp.tutorial.step1;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
