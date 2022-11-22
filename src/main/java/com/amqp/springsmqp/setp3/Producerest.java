@@ -10,5 +10,6 @@ public class Producerest {
                 new AnnotationConfigApplicationContext(RabbitConfiguration.class);
         AmqpTemplate template = context.getBean(AmqpTemplate.class);
         template.convertAndSend("myqueue", "With Java Configuration testing");
+        System.out.println("after send ");
     }
 }
