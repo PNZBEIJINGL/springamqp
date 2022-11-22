@@ -10,7 +10,7 @@ public class Producerest {
         ApplicationContext context =
                 new AnnotationConfigApplicationContext(RabbitConfiguration.class);
         AmqpTemplate template = context.getBean(AmqpTemplate.class);
-        template.convertAndSend("myqueue", "Message from "+Producerest);
+        template.convertAndSend("myqueue", "Message from "+Producerest.class.getName());
         System.out.println("after send ");
     }
 }
