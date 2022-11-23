@@ -9,10 +9,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class RabbitAmqpTutorialsApplication {
+public class Tut1Application {
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(RabbitAmqpTutorialsApplication.class, args);
+        SpringApplication.run(Tut1Application.class, args);
     }
 
     @Bean
